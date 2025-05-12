@@ -30,7 +30,7 @@ def seed_torch(seed):
 
 
 def get_params():
-    parser = argparse.ArgumentParser(description='PIM Params')
+    parser = argparse.ArgumentParser(description='PIA Params')
 
     parser.add_argument('--name', default='', type=str)
     parser.add_argument('--nn', default='vit_base_patch16_224', type=str)
@@ -123,7 +123,7 @@ class Base_Attack:
         return adv_images_temp
 
 
-class PIM(Base_Attack):
+class PIA(Base_Attack):
     def __init__(self, model, eps=8 / 255, alpha=2 / 255, steps=10, m1=5, m2=3, resize_rate=0.9, diversity_prob=0.5,
                  decay=1):
         super().__init__(model)
@@ -235,7 +235,7 @@ def main():
         black_model.load_state_dict(torch.load(f'./run_attack/weights/{item}.pth'))
         black_models.append(torch.nn.DataParallel(black_model.to(device), device_ids=device_ids).eval())
 
-    atk = PIM(source_model, eps=args.eps, alpha=args.alpha, steps=args.steps, m1=args.m1, m2=args.m2,
+    atk = PIA(source_model, eps=args.eps, alpha=args.alpha, steps=args.steps, m1=args.m1, m2=args.m2,
               resize_rate=args.resize_rate, diversity_prob=args.diversity_prob, decay=args.decay)
 
     total = 0
