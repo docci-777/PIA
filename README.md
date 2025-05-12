@@ -1,4 +1,4 @@
-# PIM
+# PIA
 PERMUTATION-INVARIANT ATTACKS
 
 ## Environments
